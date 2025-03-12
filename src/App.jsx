@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react';
+import './App.css'
+
 import * as trackService from './services/trackService';
 import TrackList from './components/TrackList/TrackList';
 import TrackDetail from './components/TrackDetail/TrackDetail';
@@ -67,6 +69,23 @@ const App = () => {
     }
   }
 
+  async function handleDeleteTrack(id) {
+    try {
+      const deletedTrack = await trackService.deleteTrack(id);
+      if (deletedTrack.err) {
+        throw new Error(deletedTrack.err);
+      }
+
+      const newTracks = tracks.filter(t => t._id !== id);
+      setTracks(newTracks);
+
+      setSelected(null);
+      setIsFormOpen(false);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   return (
     <>
       <TrackList
@@ -85,6 +104,7 @@ const App = () => {
         <TrackDetail
           selected={selected}
           handleFormView={handleFormView}
+          handleDeleteTrack={handleDeleteTrack}
         />
       }
     </>

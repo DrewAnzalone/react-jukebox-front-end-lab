@@ -1,8 +1,8 @@
 const TrackList = (props) => {
   return (
-    <div>
+    <div className="sidebar-container">
       <h1>Track List</h1>
-      <div>
+      <div className="list-container">
         {!props.tracks.length ? (
           <h2>No Tracks Yet!</h2>
         ) : (
@@ -18,10 +18,10 @@ const TrackList = (props) => {
             ))}
           </ul>
         )}
-        <button onClick={props.handleFormView}>
-          {props.isFormOpen ? "Close Form" : "New Track"}
-        </button>
       </div>
+      <button onClick={props.handleFormView}>
+        {props.isFormOpen ? "Close Form" : "New Track"}
+      </button>
     </div>
   );
 

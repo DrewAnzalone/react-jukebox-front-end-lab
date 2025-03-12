@@ -24,7 +24,7 @@ const TrackForm = (props) => {
   }
 
   return (
-    <div>
+    <div className="form-container">
       <form onSubmit={handleSubmit}>
         <label htmlFor="title"> Title </label>
         <input

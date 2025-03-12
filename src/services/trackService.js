@@ -37,8 +37,21 @@ async function update(formData, id) {
   }
 }
 
+async function deleteTrack(id) {
+  try {
+    const res = await fetch(`${BASE_URL}/${id}`, {
+      method: "DELETE",
+    });
+
+    return res.json(); 
+  } catch (err) {
+    console.log(err);
+  }
+}
+
 export {
   index,
   create,
   update,
+  deleteTrack,
 };
