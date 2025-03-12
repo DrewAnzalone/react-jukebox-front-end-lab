@@ -50,6 +50,23 @@ const App = () => {
     }
   }
 
+  async function handleUpdateTrack(formData, id) {
+    try {
+      const updatedTrack = await trackService.update(formData, id);
+      if (updatedTrack.err) {
+        throw new Error(updatedTrack.err);
+      }
+
+      const newTracks = tracks.map(t => t._id === id ? updatedTrack : t);
+      setTracks(newTracks);
+
+      setSelected(updatedTrack);
+      setIsFormOpen(false);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   return (
     <>
       <TrackList
@@ -61,6 +78,7 @@ const App = () => {
       {isFormOpen ?
         <TrackForm
           handleAddTrack={handleAddTrack}
+          handleUpdateTrack={handleUpdateTrack}
           selected={selected}
         />
         :

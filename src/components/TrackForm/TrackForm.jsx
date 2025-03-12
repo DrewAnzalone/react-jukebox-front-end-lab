@@ -15,7 +15,11 @@ const TrackForm = (props) => {
 
   function handleSubmit(evt) {
     evt.preventDefault();
-    props.handleAddTrack(formData);
+    if (props.selected) {
+      props.handleUpdateTrack(formData, props.selected._id);
+    } else {
+      props.handleAddTrack(formData);
+    }
     setFormData(initialState)
   }
 
