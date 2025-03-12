@@ -1,18 +1,26 @@
 import { useState } from "react"
 
-const TrackForm = () => {
-  const [formData, setFormData] = useState({
-    title: '',
-    artist: '',
-  });
+const initialState = {
+  title: '',
+  artist: '',
+}
+
+const TrackForm = (props) => {
+  const [formData, setFormData] = useState(initialState);
 
   function handleChange(evt) {
     setFormData({ ...formData, [evt.target.name]: evt.target.value });
   }
 
+  function handleSubmit(evt) {
+    evt.preventDefault();
+    props.handleAddTrack(formData);
+    setFormData(initialState)
+  }
+
   return (
     <div>
-      <form>
+      <form onSubmit={handleSubmit}>
         <label htmlFor="title"> Title </label>
         <input
           id="title"
