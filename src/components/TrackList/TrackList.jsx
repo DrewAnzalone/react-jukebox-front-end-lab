@@ -11,7 +11,7 @@ const TrackList = (props) => {
               <li className="li-container" key={track._id}>
                 <p>{track.title}</p>
                 <button
-                  style={{ cursor: 'pointer', color: "#646CFF" }}
+                  style={{ color: "#646CFF" }}
                   onClick={() => props.handleSelect(track)}
                 >
                   Play
