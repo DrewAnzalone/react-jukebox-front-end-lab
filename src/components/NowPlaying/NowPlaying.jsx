@@ -1,15 +1,15 @@
 const TrackDetail = (props) => {
   if (!props.selected) {
     return (
-      <div className="detail-container">
-        <h1>NO DETAILS</h1>
+      <div className="details-container">
+        <h1>NO TRACKS PLAYING</h1>
       </div>
     );
   }
 
   return (
     <div className="details-container">
-      <h1>{props.selected.title}</h1>
+      <h1>NOW PLAYING: {props.selected.title}</h1>
       <h2>Artist: {props.selected.artist}</h2>
       <div className="button-container">
         <button onClick={() => props.handleFormView(props.selected)}>
