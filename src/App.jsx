@@ -10,7 +10,8 @@ const App = () => {
   const [isFormOpen, setIsFormOpen] = useState(false);
 
   const handleSelect = (track) => {
-    setSelected(track)
+    setSelected(track);
+    setIsFormOpen(false);
   }
 
   useEffect(() => {
@@ -28,13 +29,19 @@ const App = () => {
     fetchTracks();
   }, []);
 
-  function handleFormView() {
+  function handleFormView(track) {
+    if (!track?._id) setSelected(null);
+
     setIsFormOpen(!isFormOpen);
   }
 
   async function handleAddTrack(formData) {
     try {
       const newTrack = await trackService.create(formData);
+      if (newTrack.err) {
+        throw new Error(newTrack.err);
+      }
+
       setTracks([...tracks, newTrack]);
       setSelected(newTrack);
       setIsFormOpen(false);
@@ -52,9 +59,15 @@ const App = () => {
         isFormOpen={isFormOpen}
       />
       {isFormOpen ?
-        <TrackForm handleAddTrack={handleAddTrack} />
+        <TrackForm
+          handleAddTrack={handleAddTrack}
+          selected={selected}
+        />
         :
-        <TrackDetail selected={selected} />
+        <TrackDetail
+          selected={selected}
+          handleFormView={handleFormView}
+        />
       }
     </>
   );
