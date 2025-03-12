@@ -1,5 +1,4 @@
 const TrackDetail = (props) => {
-  // return if props.selected is null
   if (!props.selected) {
     return (
       <div>
@@ -8,11 +7,10 @@ const TrackDetail = (props) => {
     );
   }
 
-  // return statement if props.selected has a truthy value
   return (
     <div>
       <h1>{props.selected.title}</h1>
-      <h2>Breed: {props.selected.artist}</h2>
+      <h2>Artist: {props.selected.artist}</h2>
     </div>
   );
 };

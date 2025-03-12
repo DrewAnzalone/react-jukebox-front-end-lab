@@ -7,6 +7,7 @@ import TrackForm from './components/TrackForm/TrackForm';
 const App = () => {
   const [tracks, setTracks] = useState([]);
   const [selected, setSelected] = useState(null);
+  const [isFormOpen, setIsFormOpen] = useState(false);
 
   const handleSelect = (track) => {
     setSelected(track)
@@ -27,12 +28,23 @@ const App = () => {
     fetchTracks();
   }, []);
 
+  function handleFormView() {
+    setIsFormOpen(!isFormOpen);
+  }
 
   return (
     <>
-      <TrackList tracks={tracks} handleSelect={handleSelect} />
-      <TrackForm />
-      <TrackDetail selected={selected} />
+      <TrackList
+        tracks={tracks}
+        handleSelect={handleSelect}
+        handleFormView={handleFormView}
+        isFormOpen={isFormOpen}
+      />
+      {isFormOpen ?
+        <TrackForm />
+        :
+        <TrackDetail selected={selected} />
+      }
     </>
   );
 };

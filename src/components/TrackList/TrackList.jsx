@@ -20,6 +20,9 @@ const TrackList = (props) => {
             ))}
           </ul>
         )}
+        <button onClick={props.handleFormView}>
+          {props.isFormOpen ? "Close Form" : "New Track"}
+        </button>
       </div>
     </div>
   );
